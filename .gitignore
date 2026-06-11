@@ -1,4 +1,8 @@
+#Entorno
 __pycache__
 .env
 .learn
-raw/dogs-vs-cats
+
+# Datos pesados
+data/raw/dogs-vs-cats/
+data/processed/dogs_vs_cats.pt
