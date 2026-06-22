@@ -24,7 +24,7 @@ def index():
             "gaming_genre": request.form["gaming_genre"],
             "stress_level": request.form["stress_level"]
         }
-    result, probability = predict(data)
+        result, probability = predict(data)
     return render_template("index.html", result=result, probability=probability)
 
 if __name__ == "__main__":
