@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
+    probability = None
     if request.method == "POST":
         data = {
             "age": float(request.form["age"]),
