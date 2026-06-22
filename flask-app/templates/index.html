@@ -1,0 +1,144 @@
+<!-- flask-gaming/templates/index.html -->
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming vs Rendimiento Académico</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        body {
+            background-color: #006464;
+        }
+
+        input, select {
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            height: auto;
+        }
+
+        button {
+            background-color: #c45200;
+            border-color: #c45200;
+        }
+
+        button:hover {
+            background-color: #a34400;
+            border-color: #a34400;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: #c45200;
+            font-weight: bold;
+            margin-left: 4px;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            font-size: 0.75rem;
+            text-align: center;
+            border-radius: 6px;
+            padding: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tooltip:hover .tooltip-text { visibility: visible; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>🎮 Gaming vs Académico</h1>
+        <p>Introduce tus datos para predecir tu rendimiento académico.</p>
+
+        <form method="POST">
+            <div class="grid-4">
+                <label>Edad
+                    <input type="number" name="age" min="16" required>
+                </label>
+                <label>Gaming / día (h)
+                    <input type="number" name="gaming_hours" step="0.1" min="0" max="8" required>
+                </label>
+                <label>Estudio / día (h)
+                    <input type="number" name="study_hours" step="0.1" min="1" max="10" required>
+                </label>
+                <label>Sueño / día (h)
+                    <input type="number" name="sleep_hours" step="0.1" min="4" max="9" required>
+                </label>
+                <label>Asistencia (%)
+                    <span class="tooltip">?<span class="tooltip-text">Porcentaje de clases a las que has asistido. Rango: 60–100%.</span></span>
+                    <input type="number" name="attendance" step="0.1" min="60" max="100" required>
+                </label>
+
+                <label>Actividad social (0-5)
+                    <span class="tooltip">?<span class="tooltip-text">Frecuencia de interacciones sociales fuera del gaming. 0 = ninguna, 5 = muy activo.</span></span>
+                    <input type="number" name="social_activity" step="0.1" min="0" max="5" required>
+                </label>
+
+                <label>Dispositivos / día (h)
+                    <span class="tooltip">?<span class="tooltip-text">Horas totales de uso de dispositivos electrónicos al día. Rango: 1.1–13.95h.</span></span>
+                    <input type="number" name="device_usage" step="0.1" min="1.1" max="13.95" required>
+                </label>
+
+                <label>Reacción (ms)
+                    <span class="tooltip">?<span class="tooltip-text">Tiempo de reacción en milisegundos. Valores bajos indican mayor rapidez. Rango: 183–348ms.</span></span>
+                    <input type="number" name="reaction_time_ms" step="0.1" min="183" max="348" required>
+                </label>
+
+                <label>Nivel de adicción
+                    <span class="tooltip">?<span class="tooltip-text">Nivel autopercibido de adicción al gaming basado en frecuencia e impacto en actividades diarias.</span></span>
+                    <select name="addiction_score">
+                        <option value="2">Bajo</option>
+                        <option value="10">Medio</option>
+                        <option value="20">Alto</option>
+                    </select>
+                </label>
+                <label>Género
+                    <select name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+                <label>Videojuego
+                    <select name="gaming_genre">
+                        <option value="Casual">Casual</option>
+                        <option value="FPS">FPS</option>
+                        <option value="RPG">RPG</option>
+                    </select>
+                </label>
+                <label>Estrés
+                    <select name="stress_level">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </label>
+            </div>
+
+            <button type="submit">Predecir rendimiento</button>
+        </form>
+
+        {% if result %}
+        <article>
+            <h2>Resultado: {{ result }}</h2>
+            <p>El modelo estima un <strong>{{ probability }}%</strong> de probabilidad para este resultado.</p>
+        </article>
+        {% endif %}
+    </main>
+</body>
+</html>
