@@ -148,7 +148,11 @@
         {% if result %}
         <article>
             <h2>Resultado: {{ result }}</h2>
-            <p>El modelo estima un <strong>{{ probability }}%</strong> de probabilidad para este resultado.</p>
+            {% if "Aprobado" in result %}
+            <p>El modelo estima un <strong>{{ probability }}%</strong> de probabilidad de que apruebes.</p>
+            {% else %}
+            <p>El modelo estima un <strong>{{ probability }}%</strong> de probabilidad de que suspendas.</p>
+            {% endif %}
         </article>
         {% endif %}
         <footer>
