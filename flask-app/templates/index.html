@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming vs Rendimiento Académico</title>
+    <title>Gaming vs Académico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <style>
         body {
@@ -58,12 +59,23 @@
         }
 
         .tooltip:hover .tooltip-text { visibility: visible; }
-    </style>
+        @media (max-width: 768px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+            </style>
 </head>
 <body>
     <main class="container">
-        <h1>🎮 Gaming vs Académico</h1>
-        <p>Introduce tus datos para predecir tu rendimiento académico.</p>
+        <h1>🎮 Gaming vs Rendimiento Académico</h1>
+        <p>Introduce tus datos para predecir si vas a aprobar o suspender tu curso.</p>
 
         <form method="POST">
             <div class="grid-4">
@@ -139,6 +151,9 @@
             <p>El modelo estima un <strong>{{ probability }}%</strong> de probabilidad para este resultado.</p>
         </article>
         {% endif %}
+        <footer>
+            <p>Github: <a href="https://github.com/ekbalam11" target="_blank">Balam Castro</a>. SVM Model and app made by me <i class="fa-solid fa-feather"></i></p>
+        </footer>
     </main>
 </body>
 </html>
